@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Andromeda Studio | Image Playground</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#fad7ff",
+                        "on-tertiary-container": "#f9d5ff",
+                        "error-container": "#93000a",
+                        "on-primary-fixed-variant": "#582a9f",
+                        "secondary-fixed": "#9cf0ff",
+                        "on-secondary-fixed": "#001f24",
+                        "on-primary": "#400688",
+                        "on-surface": "#e5e2e3",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "inverse-primary": "#7046b8",
+                        "surface-variant": "#353436",
+                        "surface-tint": "#d4bbff",
+                        "tertiary-fixed-dim": "#debbe4",
+                        "tertiary-container": "#765a7d",
+                        "secondary-container": "#00e3fd",
+                        "primary-container": "#764bbe",
+                        "primary": "#d4bbff",
+                        "surface-dim": "#131314",
+                        "surface-container-lowest": "#0e0e0f",
+                        "on-secondary": "#00363d",
+                        "outline": "#988ca0",
+                        "surface-container-highest": "#353436",
+                        "on-tertiary-fixed": "#291231",
+                        "surface-container-low": "#1c1b1c",
+                        "tertiary": "#debbe4",
+                        "background": "#131314",
+                        "surface-container": "#201f20",
+                        "on-surface-variant": "#cfc2d7",
+                        "surface-bright": "#3a393a",
+                        "on-background": "#e5e2e3",
+                        "error": "#ffb4ab",
+                        "secondary": "#bdf4ff",
+                        "primary-fixed": "#ebdcff",
+                        "secondary-fixed-dim": "#00daf3",
+                        "outline-variant": "#4c4354",
+                        "surface-container-high": "#2a2a2b",
+                        "on-primary-fixed": "#260058",
+                        "primary-fixed-dim": "#d4bbff",
+                        "on-secondary-container": "#00616d",
+                        "surface": "#131314",
+                        "on-tertiary-fixed-variant": "#583d5f",
+                        "inverse-surface": "#e5e2e3",
+                        "on-tertiary": "#402747",
+                        "on-secondary-fixed-variant": "#004f58",
+                        "on-primary-container": "#eadbff",
+                        "inverse-on-surface": "#313031"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "1.25rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #131314; color: #e5e2e3; }
+        .glass-panel {
+            background: rgba(42, 42, 43, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(76, 67, 84, 0.2);
+        }
+        .nebula-glow {
+            box-shadow: 0 0 40px rgba(212, 187, 255, 0.06);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Override default select styles for rounded corners */
+        select { border-radius: 1rem !important; }
+        input { border-radius: 1rem !important; }
+        button { border-radius: 1rem !important; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-container min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-[#1c1b1c] text-[#d4bbff] font-manrope tracking-tight w-full sticky top-0 z-50 shadow-[0_0_40px_rgba(212,187,255,0.06)]">
+<div class="flex justify-between items-center px-8 py-3 w-full">
+<div class="flex items-center gap-6">
+<div class="text-lg font-bold tracking-tighter text-[#d4bbff] flex items-center gap-2">
+<img alt="Andromeda Logo" class="h-7 w-7 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqzv3Lozd5WRD8lh46xROC7tJnmqT5NOoMGC6cfitLqtqIGWNhxrECJTDz6lhkSS94DHeAOr7e0zQB-llkjwmLK_17enVP4Z-lxSIqmBk05dHlRLRcjSKUEH5GGAfYRGWYCwX3jcWlmAlooF4QY2uFb70YX9A24NDFR9S0eO8sEifXRuoSRS1R0lKum2x0UljbQJ7GsW5hSW28bpSrL8qwxJn7J5r1u1K3E4ZuG5qMg0Dot10PbTmA2H1nrZ6QYuSx8HBw2Q-3xwIY"/>
+                Andromeda Studio
+            </div>
+<nav class="hidden md:flex gap-6 ml-4">
+<a class="text-[#d4bbff] border-b-2 border-[#d4bbff] pb-0.5 transition-all duration-300 rounded-sm" href="#">Gallery</a>
+<a class="text-slate-400 hover:text-slate-200 transition-all duration-300 rounded-md px-2 py-0.5" href="#">Assets</a>
+<a class="text-slate-400 hover:text-slate-200 transition-all duration-300 rounded-md px-2 py-0.5" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 transition-all duration-300 hover:bg-[#2a2a2b] rounded-full scale-90 active:scale-75">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 transition-all duration-300 hover:bg-[#2a2a2b] rounded-full scale-90 active:scale-75">
+<span class="material-symbols-outlined">history</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant/30">
+<img alt="User profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdf-U5PpeqTAmMVBNiStejlxamWOwzuuVSx_l95-RQ_ZJbfSYjCSRB7S9uEs89jUIaaq1nbcxWSU1ID2hB7WUUT0bTAJdoTIoKiYXyAoORhlsegWH4ayX7eq8YG-uEuLKcFLNlwsZZBiPM0snSJLd7GMJUHYLBUlUtPSNcrBsrZBNFOKfDWf_DWD0dduIE1fxuVgHC-q1cdrXEhM0PX92eUrsDaeDMwTpc4bNHLBavAVcAu5fPbe1CQjfqv6Wb7qxSSJ9yTS1DKArI"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col h-screen w-60 fixed left-0 top-0 bg-[#1c1b1c] border-r border-[#4c4354]/15 py-6 px-4 font-manrope text-sm font-medium tracking-wide z-40 pt-[160px]">
+<div class="mb-6 px-2">
+<button class="w-full py-2.5 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-xl font-bold transition-all duration-300 hover:brightness-110 active:scale-95 flex items-center justify-center gap-2 mt-4">
+<span class="material-symbols-outlined text-sm">add</span>
+            New Creation
+        </button>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#d4bbff] bg-[#2a2a2b]/50 rounded-xl" href="#">
+<span class="material-symbols-outlined">auto_fix_high</span>
+            Canvas
+        </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 hover:text-[#bdf4ff] hover:bg-[#2a2a2b] transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">terminal</span>
+            Prompt
+        </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 hover:text-[#bdf4ff] hover:bg-[#2a2a2b] transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">view_in_ar</span>
+            Models
+        </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 hover:text-[#bdf4ff] hover:bg-[#2a2a2b] transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">layers</span>
+            Layers
+        </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 hover:text-[#bdf4ff] hover:bg-[#2a2a2b] transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+            History
+        </a>
+</nav>
+<div class="mt-auto space-y-1 pt-4 border-t border-outline-variant/10">
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 hover:text-[#bdf4ff] hover:bg-[#2a2a2b] transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+            Support
+        </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 hover:text-[#bdf4ff] hover:bg-[#2a2a2b] transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">logout</span>
+            Sign Out
+        </a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="md:ml-60 min-h-[calc(100vh-64px)] flex flex-col items-center justify-start p-6 overflow-y-auto">
+<!-- Image Playground Workstation -->
+<div class="w-full max-w-7xl flex flex-col gap-5">
+<!-- Header Text -->
+<div class="w-full flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="space-y-1">
+<span class="text-[10px] text-primary tracking-[0.2em] font-bold uppercase ml-1">Andromeda</span>
+<h1 class="text-3xl md:text-4xl font-extrabold tracking-tighter text-on-surface">Image Playground</h1>
+</div>
+<div class="flex gap-3">
+<div class="flex flex-col gap-1 min-w-[160px]">
+<label class="text-[9px] uppercase tracking-widest text-slate-500 font-bold ml-2">Function</label>
+<div class="relative">
+<select class="w-full bg-surface-container appearance-none border border-outline-variant/20 focus:border-primary px-4 py-2 text-sm transition-all outline-none rounded-xl">
+<option>Background Removal</option>
+<option>Passport Photo Studio</option>
+<option>Object Eraser</option>
+<option>Style Transfer</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2 pointer-events-none text-slate-500 text-lg">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 min-w-[160px]">
+<label class="text-[9px] uppercase tracking-widest text-slate-500 font-bold ml-2">Parameters</label>
+<div class="relative">
+<select class="w-full bg-surface-container appearance-none border border-outline-variant/20 focus:border-primary px-4 py-2 text-sm transition-all outline-none rounded-xl">
+<option>Quality: Ultra HD</option>
+<option>Quality: High</option>
+<option>Speed: Rapid</option>
+<option>Country: USA (Passport)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2 pointer-events-none text-slate-500 text-lg">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Editor Workspace -->
+<div class="w-full flex flex-col items-center gap-5">
+<!-- Central Image Area -->
+<div class="w-full aspect-[16/7] glass-panel rounded-2xl flex items-center justify-center relative overflow-hidden group border border-outline-variant/10 nebula-glow">
+<!-- Background Ambient Gradient -->
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-secondary/5 opacity-40"></div>
+<!-- Main Preview Image -->
+<div class="relative z-10 w-full h-full p-4 flex items-center justify-center">
+<div class="relative h-full w-full max-w-full rounded-xl shadow-2xl group/img overflow-hidden flex items-center justify-center">
+<img alt="Uploaded Subject" class="h-full w-auto max-w-full object-contain rounded-xl border border-white/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANbS3zZnpIUwUViNsF_miQUWVPK0b3BalCDOy1JjBbspuwgJBmYnBP2q_0_yCpd5zfq_P2lMNhnXpNu7BNL6PCFEvLPCanQRQ7GgXUJnNJXTykLs7syJZrE07IcPV8KYYkhf0WunmcovqU_9hl9mapcgaGBI2kIzO17zNd_fXVZK-SOXA-c3WC2mvccjMWUl3dz0y1OFO8sVJm_QqJHWg9ZQ1_UfOJuHarH_Wunlb4tOyUg_TuwFaEnK4CCh1XpLzppZ1fT3Nlj6VV"/>
+<!-- Annotation Overlay -->
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover/img:opacity-100 transition-opacity cursor-crosshair flex items-center justify-center">
+<div class="bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-primary/40 text-xs font-medium text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">draw</span>
+                                Click to refine foreground selection
+                            </div>
+</div>
+</div>
+</div>
+<!-- Floating Toolbar -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-1 p-1 bg-[#2a2a2b]/80 backdrop-blur-xl border border-white/5 rounded-full z-20">
+<button class="p-2.5 hover:bg-white/10 rounded-full text-slate-300 transition-colors" title="Select Tool">
+<span class="material-symbols-outlined">near_me</span>
+</button>
+<div class="w-px h-5 bg-white/10 mx-1"></div>
+<button class="p-2.5 hover:bg-white/10 rounded-full text-slate-300 transition-colors" title="Brush">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">brush</span>
+</button>
+<button class="p-2.5 hover:bg-white/10 rounded-full text-slate-300 transition-colors" title="Lasso">
+<span class="material-symbols-outlined">gesture</span>
+</button>
+<div class="w-px h-5 bg-white/10 mx-1"></div>
+<button class="p-2.5 hover:bg-white/10 rounded-full text-slate-300 transition-colors" title="Undo">
+<span class="material-symbols-outlined">undo</span>
+</button>
+<button class="p-2.5 hover:bg-white/10 rounded-full text-slate-300 transition-colors" title="Redo">
+<span class="material-symbols-outlined">redo</span>
+</button>
+</div>
+<!-- Floating Add Button -->
+<button class="absolute top-6 right-6 w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center transition-all active:scale-90 group/add">
+<span class="material-symbols-outlined text-primary group-hover/add:rotate-90 transition-transform">add</span>
+</button>
+</div>
+<!-- Refinement Bar & CTA -->
+<div class="w-full grid grid-cols-1 md:grid-cols-12 gap-3">
+<div class="md:col-span-9 relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-slate-500">auto_awesome</span>
+<input class="w-full bg-surface-container-high border-none rounded-xl py-4 pl-12 pr-4 text-sm focus:ring-1 focus:ring-primary/50 transition-all placeholder:text-slate-600" placeholder="Refine edge detection or describe new background..." type="text"/>
+</div>
+<div class="md:col-span-3">
+<button class="w-full h-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-xl py-4 flex items-center justify-center gap-2 transition-all hover:shadow-[0_0_20px_rgba(212,187,255,0.3)] active:scale-95">
+<span class="material-symbols-outlined">temp_preferences_custom</span>
+                        Process
+                    </button>
+</div>
+</div>
+<!-- Contextual Info Cards -->
+<div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="glass-panel p-4 rounded-xl border border-outline-variant/5">
+<div class="flex items-center gap-3 mb-2 text-secondary">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+<h3 class="text-[10px] font-bold uppercase tracking-widest">Passport Ready</h3>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed">Automatic biometric points for 2x2 visa requirements.</p>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-outline-variant/5">
+<div class="flex items-center gap-3 mb-2 text-primary">
+<span class="material-symbols-outlined text-lg">flare</span>
+<h3 class="text-[10px] font-bold uppercase tracking-widest">Neural Cleanup</h3>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed">Hair-thin masking precision with Andromeda 2.0.</p>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-outline-variant/5">
+<div class="flex items-center gap-3 mb-2 text-tertiary">
+<span class="material-symbols-outlined text-lg">layers_clear</span>
+<h3 class="text-[10px] font-bold uppercase tracking-widest">Batch Support</h3>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed">Process up to 50 images with identical parameters.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Background Decoration -->
+<div class="fixed top-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] pointer-events-none -z-10"></div>
+<div class="fixed bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/5 blur-[100px] pointer-events-none -z-10"></div>
+</body></html>

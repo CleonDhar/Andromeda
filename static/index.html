@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Andromeda Studio | Playground</title>
+    <meta name="description" content="Andromeda Studio — High-precision AI background removal powered by Remove.bg API." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/style.css?v=2.7" />
+
+
+</head>
+<body>
+
+    <!-- ══════════════════ TOP NAV ══════════════════ -->
+    <header id="top-nav">
+        <div class="nav-left">
+            <div class="logo">
+                <div class="logo-icon">
+                    <span class="material-symbols-outlined">blur_on</span>
+                </div>
+                <span class="logo-text">Andromeda</span>
+                <span class="logo-badge">PASSPORT PHOTO STUDIO</span>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- ══════════════════ MAIN LAYOUT ══════════════════ -->
+    <div class="app-layout">
+
+        <!-- ─── LEFT SIDEBAR ─── -->
+        <aside id="sidebar">
+
+            <div class="sidebar-section">
+                <h2 class="sidebar-label">Controls</h2>
+                <label class="file-upload-label" for="image-upload" id="upload-trigger">
+                    <span class="material-symbols-outlined">cloud_upload</span>
+                    <span>Choose Image</span>
+                    <input type="file" id="image-upload" accept="image/png, image/jpeg, image/webp" hidden />
+                </label>
+                <div class="file-name-display" id="file-name-display">No file selected</div>
+
+                <button class="btn-process" id="process-btn" disabled>
+                    <span class="material-symbols-outlined btn-icon">auto_fix_high</span>
+                    <span class="btn-label">Remove Background</span>
+                </button>
+
+                <!-- Edit Controls (Revealable) -->
+                <div id="edit-controls" class="edit-controls hidden">
+                    <h3 class="selector-label">Biometric Ratios</h3>
+                    <div class="custom-dropdown" id="custom-ratio-dropdown">
+                        <div class="dropdown-trigger" id="dropdown-trigger-btn">
+                            <span id="selected-ratio-label">Custom / Free Form</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu">
+                            <div class="dropdown-item active" data-value="custom" data-ratio="NaN" data-bg="transparent">Custom / Free Form</div>
+                            <div class="dropdown-item" data-value="india" data-ratio="0.777" data-bg="#FFFFFF">India (7:9)</div>
+                            <div class="dropdown-item" data-value="usa" data-ratio="1" data-bg="#FFFFFF">USA (1:1)</div>
+                            <div class="dropdown-item" data-value="uk" data-ratio="0.777" data-bg="#F5F5F5">UK (35x45mm)</div>
+                        </div>
+                        <select id="ratio-selector" class="hidden">
+                            <option value="custom" data-ratio="NaN" data-bg="transparent">Custom / Free Form</option>
+                            <option value="india" data-ratio="0.777" data-bg="#FFFFFF">India (7:9)</option>
+                            <option value="usa" data-ratio="1" data-bg="#FFFFFF">USA (1:1)</option>
+                            <option value="uk" data-ratio="0.777" data-bg="#F5F5F5">UK (35x45mm)</option>
+                        </select>
+                    </div>
+
+                    <button id="save-crop-btn" class="btn-save">
+                        <span class="material-symbols-outlined">check_circle</span>
+                        <span>Save Changes</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="footer-actions">
+                    <button class="btn-action btn-edit hidden" id="edit-btn">
+                        <span class="material-symbols-outlined">crop</span>
+                        <span>Edit</span>
+                    </button>
+                    <a class="btn-action btn-download hidden" id="download-btn" download="andromeda_processed.png">
+                        <span class="material-symbols-outlined">download</span>
+                        <span>Download</span>
+                    </a>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- ─── CENTRAL CANVAS ─── -->
+        <main id="canvas-area">
+            <div class="canvas-wrapper" id="canvas-wrapper">
+                <!-- Drop Zone (before image upload) -->
+                <div class="drop-zone" id="drop-zone">
+                    <span class="drop-text">Drag and drop or upload</span>
+                </div>
+
+
+                <!-- Preview Container (shown after upload) -->
+                <div class="preview-container hidden" id="preview-container">
+                    <div class="image-layers" id="layer-box">
+                        <div id="checker-layer"></div>
+                        <canvas id="viewport-canvas"></canvas>
+                        <img id="preview-image" class="reveal-layer hidden" alt="Processed" />
+                    </div>
+                </div>
+
+
+
+
+                <!-- Processing Overlay -->
+                <div class="processing-overlay hidden" id="processing-overlay">
+                    <div class="processing-spinner"></div>
+                    <p class="processing-text" id="processing-text">Initializing…</p>
+                </div>
+            </div>
+
+            <!-- Canvas Info Bar -->
+            <div class="canvas-info-bar" id="canvas-info-bar">
+                <div class="info-chip" id="info-dimensions">
+                    <span class="material-symbols-outlined">aspect_ratio</span>
+                    <span>—</span>
+                </div>
+                <div class="info-chip" id="info-size">
+                    <span class="material-symbols-outlined">data_usage</span>
+                    <span>—</span>
+                </div>
+                <div class="info-chip" id="info-format">
+                    <span class="material-symbols-outlined">image</span>
+                    <span>—</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ══════════════════ AMBIENT DECORATIONS ══════════════════ -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="/static/app.js?v=2.7"></script>
+
+</body>
+</html>
