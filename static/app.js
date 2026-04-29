@@ -14,6 +14,7 @@ const Andromeda = {
     init() {
         this.cacheDOM();
         this.bindEvents();
+        this.startEngineStatusPolling();
         this.log('idle', 'radio_button_checked', 'Studio initialized. Ready for input.');
     },
 
@@ -35,6 +36,7 @@ const Andromeda = {
         this.statusLogger    = document.getElementById('status-logger');
         this.downloadBtn     = document.getElementById('download-btn');
         this.canvasWrapper   = document.getElementById('canvas-wrapper');
+        this.statusIcon      = document.getElementById('status-icon');
 
         // Custom Dropdown
         this.dropdownTrigger = document.getElementById('dropdown-trigger-btn');
@@ -380,6 +382,39 @@ const Andromeda = {
 
     setInfoChip(el, icon, text) {
         el.innerHTML = `<span class="material-symbols-outlined">${icon}</span><span>${text}</span>`;
+    },
+
+    // ─── Engine Status Polling ───
+    startEngineStatusPolling() {
+        if (!this.statusIcon) return;
+        
+        const fetchStatus = async () => {
+            try {
+                const response = await fetch('/status');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.mode === 'cloud') {
+                        this.statusIcon.classList.remove('local-mode');
+                        this.statusIcon.classList.add('cloud-mode');
+                        this.statusIcon.title = 'Cloud Mode (Online)';
+                    } else {
+                        this.statusIcon.classList.remove('cloud-mode');
+                        this.statusIcon.classList.add('local-mode');
+                        this.statusIcon.title = 'Local Mode (Offline)';
+                    }
+                }
+            } catch (err) {
+                // If backend is unreachable, assume local/offline or disconnected
+                this.statusIcon.classList.remove('cloud-mode');
+                this.statusIcon.classList.add('local-mode');
+                this.statusIcon.title = 'Disconnected';
+            }
+        };
+
+        // Initial check
+        fetchStatus();
+        // Poll every 5 seconds
+        setInterval(fetchStatus, 5000);
     }
 };
 

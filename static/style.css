@@ -195,6 +195,29 @@ body {
     box-shadow: 0 0 8px rgba(74, 222, 128, 0.5);
 }
 
+.status-icon {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #F44336; /* Local default */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 0 12px rgba(244, 67, 54, 0.6);
+    z-index: 105;
+}
+
+.status-icon.cloud-mode {
+    background: #4CAF50;
+    box-shadow: 0 0 12px rgba(76, 175, 80, 0.6);
+}
+
+.status-icon.local-mode {
+    background: #F44336;
+    box-shadow: 0 0 12px rgba(244, 67, 54, 0.6);
+}
+
 /* ═══════════════════════════════════════════════════════
    APP LAYOUT
    ═══════════════════════════════════════════════════════ */
